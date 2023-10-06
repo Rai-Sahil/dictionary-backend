@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
 
     if (req.method === 'OPTIONS') {
         res.writeHead(200, {
-            'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+            'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app',
             'Access-Control-Allow-Methods': 'GET, POST',
             'Access-Control-Allow-Headers': 'Content-Type',
         });
@@ -36,7 +36,7 @@ const server = http.createServer((req, res) => {
                 dictionary.push({ word, definition });
                 res.writeHead(200, {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+                    'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app/search.html',
                     'Access-Control-Allow-Methods': 'GET, POST',
                 });
                 res.end(JSON.stringify({ message: `Request #${++requestsReceived}`, newEntry: { word, definition } }));
@@ -50,14 +50,14 @@ const server = http.createServer((req, res) => {
         if (entry) {
             res.writeHead(200, {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://127.0.0.1:5500', 
+                'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app/search.html', 
                 'Access-Control-Allow-Methods': 'GET, POST',
             });
             res.end(JSON.stringify({ found: true, definition: entry.definition, numberOfRequest: requestsReceived }));
         } else {
             res.writeHead(400, {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://127.0.0.1:5500', 
+                'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app/search.html', 
                 'Access-Control-Allow-Methods': 'GET, POST',
             });
             res.end(JSON.stringify({ found: false, numberOfRequest: requestsReceived }));
