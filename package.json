@@ -2,6 +2,7 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
-    "url": "^0.11.3"
+    "url": "^0.11.3",
+    "winston": "^3.10.0"
   }
 }

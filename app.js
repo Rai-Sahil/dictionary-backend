@@ -1,5 +1,16 @@
 const http = require('http');
 const url = require('url');
+const winston = require('winston');
+
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    transports: [
+        new winston.transports.File({ filename: 'logfile.log' })
+    ]
+});
+
+
 
 const dictionary = [];
 let requestsReceived = 0;
@@ -8,6 +19,8 @@ const server = http.createServer((req, res) => {
     const parseUrl = url.parse(req.url, true);
 
     if (req.method === 'OPTIONS') {
+        logger.info("This is a log message written to a file.");
+
         res.writeHead(200, {
             'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app',
             'Access-Control-Allow-Methods': 'GET, POST',
@@ -50,14 +63,14 @@ const server = http.createServer((req, res) => {
         if (entry) {
             res.writeHead(200, {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app/search.html', 
+                'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app/search.html',
                 'Access-Control-Allow-Methods': 'GET, POST',
             });
             res.end(JSON.stringify({ found: true, definition: entry.definition, numberOfRequest: requestsReceived }));
         } else {
             res.writeHead(400, {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app/search.html', 
+                'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app/search.html',
                 'Access-Control-Allow-Methods': 'GET, POST',
             });
             res.end(JSON.stringify({ found: false, numberOfRequest: requestsReceived }));
