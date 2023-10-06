@@ -9,6 +9,7 @@ const server = http.createServer((req, res) => {
     const parseUrl = url.parse(req.url, true);
 
     if (req.method === 'OPTIONS') {
+        logger.info("This is a log message written to a file.");
         res.writeHead(200, {
             'Access-Control-Allow-Origin': 'https://dictionary-frontend-five.vercel.app',
             'Access-Control-Allow-Methods': 'GET, POST',
