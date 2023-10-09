@@ -1,6 +1,5 @@
 const http = require('http');
 const url = require('url');
-const winston = require('winston');
 
 const dictionary = [];
 let requestsReceived = 0;
@@ -9,7 +8,6 @@ const server = http.createServer((req, res) => {
     const parseUrl = url.parse(req.url, true);
 
     if (req.method === 'OPTIONS') {
-        logger.info("This is a log message written to a file.");
         res.writeHead(200, {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST',
